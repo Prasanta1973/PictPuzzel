@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Picture Puzzle Make Mickey Mouse</title>
+<style>
+body{
+	width:300px;
+	margin:0px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#box{
+	width:300px;
+	height:300px;
+	border:5px solid #000;
+	overflow:hidden;
+}
+#b0,#b1,#b2,#b3,#b4,#b5,#b6,#b7,#b8,#b9{
+	width:98px;
+	height:98px;
+	border:1px solid #CCC;
+	float:left;
+	overflow:hidden;
+	background-color:#666;
+}
+#nbox{
+	width:300px;
+	height:auto;
+	border:2px solid #F00;
+	margin-bottom:10px;
+	overflow:auto;
+}
+#footer{
+	width:310px;
+	height:20px;
+	background-color:#030;
+	color:#FFF;
+	text-align:center;
+}
+#footer a{
+	text-decoration:none;
+	color:#FFF;
+}
+</style>
+<script>
+ysco=0;pictnum=1;
+function nextpict(){
+	pictnum=(pictnum!=9) ? (pictnum+1) : 9;
+	
+	document.getElementById("samplepict").src="pzpic"+pictnum+".jpg";
+	for(k=1;k<=8;k++)
+	document.getElementById("taskpict"+k).src="pzpic"+pictnum+".jpg";
+	
+}
+function previouspict(){
+	pictnum=(pictnum!=1) ? (pictnum-1) : 1;
+	
+	document.getElementById("samplepict").src="pzpic"+pictnum+".jpg";
+	for(k=1;k<=8;k++)
+	document.getElementById("taskpict"+k).src="pzpic"+pictnum+".jpg";
+	
+}
+function swap(i){
+	bk1="null";bk2="null";bk3="null";bk4="null";
+	cc=document.getElementById(i).innerHTML;
+	n=Number(i.charAt(1));
+	n1=n+1;
+	n2=n-1;
+	n3=n+3;
+	n4=n-3;	
+	
+	if(n1>=0 && n1<=8 && (n%3!=2))
+	bk1=document.getElementById("b"+n1).innerHTML;
+	if(n2>=0 && n2<=8 && (n%3!=0))
+	bk2=document.getElementById("b"+n2).innerHTML;
+	if(n3>=0 && n3<=8)
+	bk3=document.getElementById("b"+n3).innerHTML;
+	if(n4>=0 && n4<=8)
+	bk4=document.getElementById("b"+n4).innerHTML;
+	
+	if(bk1==""){
+	document.getElementById("b"+n1).innerHTML=document.getElementById(i).innerHTML;
+	document.getElementById(i).innerHTML="";
+	}
+	if(bk2==""){
+	document.getElementById("b"+n2).innerHTML=document.getElementById(i).innerHTML;
+	document.getElementById(i).innerHTML="";
+	}
+	if(bk3==""){
+	document.getElementById("b"+n3).innerHTML=document.getElementById(i).innerHTML;
+	document.getElementById(i).innerHTML="";
+	}
+	if(bk4==""){
+	document.getElementById("b"+n4).innerHTML=document.getElementById(i).innerHTML;
+	document.getElementById(i).innerHTML="";
+	}
+	ysco++;
+	document.getElementById("yscore").value=(1000-ysco);
+	
+	ans=0;
+	for(j=0;j<9;j++){
+		if(chk[j]==document.getElementById("b"+j).innerHTML)
+		ans++;
+	}
+	//alert(ans);
+	if(ans==9){
+	document.getElementById("send").disabled=false;
+	alert("Good Work");
+	}
+	
+}
+</script>
+</head>
+
+<body>
+<div id="nbox">
+<b>Picture Puzzle : Make Mickey Mouse</b><br />
+<img src="pzpic1.jpg" id="samplepict" align="left" height="100"  />
+<form action="#" method="get" target="scorebox">
+Enter Your Name <br />
+<input type="text" name="yname" id="yname" required /><br />
+Score (1000 - Your Click)<br />
+<input type="text" name="yscore" id="yscore" value="1000" readonly /><br />
+<input type="submit" id="send" disabled value="Submit Your Score" />
+</form>
+</div>
+<div id="box">
+<div id="b0" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict1" style="margin:0px 0px 0px 0px;" /></div>
+<div id="b1" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict2" style="margin:0px 0px 0px -100px;" /></div>
+<div id="b2" onclick="swap(this.id)"></div>
+<div id="b3" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict3" style="margin:-100px 0px 0px 0px;" /></div>
+<div id="b4" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict4" style="margin:-100px 0px 0px -100px;" /></div>
+<div id="b5" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict5" style="margin:-100px 0px 0px -200px;" /></div>
+<div id="b6" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict6" style="margin:-200px 0px 0px 0px;" /></div>
+<div id="b7" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict7" style="margin:-200px 0px 0px -100px;" /></div>
+<div id="b8" onclick="swap(this.id)"><img src="pzpic1.jpg" id="taskpict8" style="margin:-200px 0px 0px -200px;" /></div>
+</div>
+<div id="footer"><a href="#" onclick="nextpict()">Next Picture</a> | <a href="#" onclick="previouspict()">Previous Picture</a> |  &copy; psofthub</div>
+<!--iframe src="scorelist.php" name="scorebox" width="300" height="200" scrolling="yes">
+</iframe-->
+
+
+<script>
+//Loading Picture
+pp=new Array();
+chk=new Array();
+
+for(j=0;j<9;j++){
+pp[j]=document.getElementById("b"+j).innerHTML;
+chk[j]=pp[j];
+}
+
+pp.sort(function(){return 0.5 - Math.random()})
+
+for(j=0;j<9;j++)
+document.getElementById("b"+j).innerHTML=pp[j];
+
+</script>
+
+</body>
+</html>
